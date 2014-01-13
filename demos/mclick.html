@@ -26,21 +26,21 @@
 	var ctbtn = document.getElementById("M-Touch-Click");
 	var time1 = 0, time2 = 0;
 
-	cbtn.onclick = function(e) {
-		alert(1);
-	};
+	cbtn.addEventListener("click", function(e){
+		alert("clicked");
+	}, false);
 
-	tbtn.ontouchend = function(e) {
-		alert(1);
-	};
+	tbtn.addEventListener("touchend", function(e){
+		alert("touched");
+	}, false);
 
-	ctbtn.onclick = function(e) {
+	ctbtn.addEventListener("click", function(e){
 		time1 = new Date();
 		alert(time2 - time1);
-	};
-	ctbtn.ontouchend = function(e) {
+	}, false);
+	ctbtn.addEventListener("touchend", function(e){
 		time2 = new Date();
-	};
+	}, false);
 	</script>
 </body>
 </html>
