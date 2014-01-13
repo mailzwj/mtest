@@ -17,5 +17,29 @@
 <body>
 	<a href="javascript:void(0);" id="M-Click">Click me!</a>
 	<a href="javascript:void(0);" id="M-Touch">Touch me!</a>
+	<a href="javascript:void(0);" id="M-Touch-Click">Touch and click!</a>
+
+	<script>
+	var cbtn = document.getElementById("M-Click");
+	var tbtn = document.getElementById("M-Touch");
+	var ctbtn = document.getElementById("M-Touch-Click");
+	var time1 = 0, time2 = 0;
+
+	cbtn.onclick = function(e) {
+		alert(1);
+	};
+
+	tbtn.ontouchend = function(e) {
+		alert(1);
+	};
+
+	ctbtn.onclick = function(e) {
+		time1 = new Date();
+		alert(time2 - time1);
+	};
+	ctbtn.ontouchend = function(e) {
+		time2 = new Date();
+	};
+	</script>
 </body>
 </html>
