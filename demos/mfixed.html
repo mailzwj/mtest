@@ -1,0 +1,60 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0"></meta>
+	<title>Fixed in mobile browsers</title>
+	<style>
+	#M-Height {
+		padding-top: 50px;
+		height: 2000px;
+	}
+	.M-Fixed {
+		position: fixed;
+		left: 0;
+		padding: 5px 0;
+		width: 100%;
+		text-align: center;
+		background-color: #f1f1f1;
+	}
+	#M-Fixed-Top {
+		top: 0;
+	}
+	#M-Fixed-Bottom {
+		bottom: 0;
+	}
+	.M-Input {
+		width: 92%;
+		height: 30px;
+		border: 1px solid #ccc;
+		-webkit-border-radius: 4px;
+		-moz-border-radius: 4px;
+		border-radius: 4px;
+	}
+	</style>
+</head>
+<body>
+	<div id="M-Height">我是撑高度的，请忽略我的内容！</div>
+	<div id="M-Fixed-Top" class="M-Fixed">
+		<input type="text" id="M-Input-Top" class="M-Input" placeholder="Type here">
+	</div>
+	<div id="M-Fixed-Bottom" class="M-Fixed">
+		<input type="text" id="M-Input-Bottom" class="M-Input" placeholder="Type here">
+	</div>
+
+	<script>
+	var ti = document.getElementById("M-Input-Top"),
+		tp = ti.parentNode,
+		th = tp.offsetHeight;
+	var bi = document.getElementById("M-Input-Bottom")
+		bp = bi.parentNode,
+		bh = bp.offsetHeight;
+	ti.addEventListener("focus", function(e){
+		//
+	}, false);
+	ti.addEventListener("blur", function(e){
+		//
+	}, false);
+	</script>
+</body>
+</html>
