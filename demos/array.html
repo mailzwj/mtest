@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>A Tips of Array</title>
+</head>
+<body>
+<script>
+function getHtmlByString(len) {
+    var html = "";
+    for (var i = 0; i < len; i++) {
+        html += "<li></li>";
+    }
+    return html;
+}
+function getHtmlByLoop(len) {
+    var arr = [];
+    for (var i = 0; i < len; i++) {
+        arr.push("<li></li>");
+    }
+    return arr.join("");
+}
+function getHtmlByArray(len) {
+    return new Array(len + 1).join("<li></li>");
+}
+
+var t1, t2, t3, t4, str1, str2, str3;
+t1 = new Date();
+str1 = getHtmlByString(100000);
+t2 = new Date();
+str2 = getHtmlByLoop(100000);
+t3 = new Date();
+str3 = getHtmlByArray(100000);
+t4 = new Date();
+console.log("str1 === str2 -> " + (str1 === str2));
+console.log("str2 === str3 -> " + (str2 === str3));
+console.log("t2 - t1 = " + (t2 - t1),"\nt3 - t2 = " + (t3 - t2),"\nt4 - t3 = " + (t4 - t3));
+</script>
+</body>
+</html>
