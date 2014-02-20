@@ -1,0 +1,47 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>UC AD Filter</title>
+</head>
+<body>
+<div class="J_SwipeLayer swipe-layer" style="display: none;">
+    <img src="http://gtms01.alicdn.com/tps/i1/T1mDHWFhpgXXcyQo.r-640-529.png" class="big-banner">
+    <a href="http://m.etao.com/download.php?src=h5pop" id="J_UseNative" data-blank="true" class="J_UseNative swipe-use-native">下载一淘客户端</a>
+    <a href="etao://home?src=h5pop" class="swipe-use-native swipe-open-native">打开一淘客户端</a>
+    <a href="javascript:void(0);" class="J_SwipeCloser swipe-close">关闭浮层</a>
+</div>
+<script src="http://g.tbcdn.cn/kissy/k/1.4.0/seed-min.js"></script>
+<script>
+    S.io({
+        url: "http://www.etao.com/go/rgn/etaoh5/pop.php", // http://cdnprepub.tms.taobao.com/go/rgn/etaoh5/pop.php
+        dataType: "jsonp",
+        jsonp: "callback",
+        jsonpCallback: "popdata",
+        success: function(popobj) {
+            var jsl = S.one(".J_SwipeLayer");
+            popobj.downbg = popobj.downbg ? ("#" + popobj.downbg) : "transparent";
+            popobj.downtextcolor = popobj.downtextcolor ? ("#" + popobj.downtextcolor) : "#fff";
+            popobj.openbg = popobj.openbg ? ("#" + popobj.openbg) : "transparent";
+            popobj.opentextcolor = popobj.opentextcolor ? ("#" + popobj.opentextcolor) : "#fff";
+            if (jsl) {
+                jsl.one(".big-banner").attr("src", popobj.banner);
+                // jsl.one(".big-banner").attr("src", "http://gtms01.alicdn.com/tps/i1/T1zI0rFuBnXXXZBpUs-640-596.jpg");
+                if (popobj.bgc) {
+                    jsl.css("background-color", "#" + popobj.bgc);
+                    // jsl.css("background-color", "#e91919");
+                }
+                jsl.one(".J_UseNative").css({"backgroundColor": popobj.downbg, "color": popobj.downtextcolor}).html(popobj.downtext);
+                jsl.one(".swipe-open-native").css({"backgroundColor": popobj.openbg, "color": popobj.opentextcolor}).html(popobj.opentext);
+                
+                if (!location.href.match(/[?&]ttid=[^&]+(\&|#|$)/g)) {
+                    flayer.init();
+                } else {
+                    flayer.clearSwipe();
+                }
+            }
+        }
+    });
+</script>
+</body>
+</html>
