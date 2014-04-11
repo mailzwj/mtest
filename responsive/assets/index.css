@@ -65,6 +65,48 @@
     background-color: #f50;
 }
 
+@media all and (max-width: 1024px) {
+    .body {
+        height: 400px;
+    }
+
+    .body .content,
+    .body .sidebar {
+        float: left;
+        width: 50%;
+        height: 100%;
+    }
+
+    .body .content {
+        background-color: #efefef;
+    }
+
+    .body .sidebar {
+        background-color: #f50;
+    }
+}
+
+/* for non-responsive browsers */
+
+.w1024 .body {
+    height: 400px;
+}
+
+.w1024 .body .content,
+.w1024 .body .sidebar {
+    float: left;
+    width: 50%;
+    height: 100%;
+}
+
+.w1024 .body .content {
+    background-color: #efefef;
+}
+
+.w1024 .body .sidebar {
+    background-color: #f50;
+}
+
 @media all and (max-width: 640px) {
     .body {
         height: auto;
@@ -108,47 +150,5 @@
 .w640 .body .sidebar {
     width: 100%;
     height: 120px;
-    background-color: #f50;
-}
-
-@media all and (max-width: 1024px) {
-    .body {
-        height: 400px;
-    }
-
-    .body .content,
-    .body .sidebar {
-        float: left;
-        width: 50%;
-        height: 100%;
-    }
-
-    .body .content {
-        background-color: #efefef;
-    }
-
-    .body .sidebar {
-        background-color: #f50;
-    }
-}
-
-/* for non-responsive browsers */
-
-.w1024 .body {
-    height: 400px;
-}
-
-.w1024 .body .content,
-.w1024 .body .sidebar {
-    float: left;
-    width: 50%;
-    height: 100%;
-}
-
-.w1024 .body .content {
-    background-color: #efefef;
-}
-
-.w1024 .body .sidebar {
     background-color: #f50;
 }
