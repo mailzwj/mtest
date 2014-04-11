@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS3 Animation实例</title>
+</head>
+<body>
+<style>
+    @-webkit-keyframes rotate {
+        from {
+            -webkit-transform: rotate(0);
+        }
+        to {
+            -webkit-transform: rotate(360deg);
+        }
+    }
+    @-moz-keyframes rotate {
+        from {
+            - moz -transform: rotate(0);
+        }
+        to {
+            - moz -transform: rotate(360deg);
+        }
+    }
+    .my-class {
+        margin: 50px auto 0;
+        width: 200px;
+        height: 200px;
+        border-radius: 50px;
+        box-shadow: 0 0 10px #f00 inset;
+        background-color: #f50;
+        -webkit-animation: rotate 5s linear infinite;
+        -moz-animation: rotate 5s linear infinite;
+        animation: rotate 5s linear infinite;
+    }
+</style>
+<div class="my-class"></div>
+</body>
+</html>
