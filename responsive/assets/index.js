@@ -23,10 +23,16 @@ Util.replaceClass = function(node, ncls, ocls) {
     var htmlNode = document.getElementsByTagName("html")[0];
     var timer = null;
     var sizes = [640, 1024];
+    var ieVersion = null;
 
     if (rIe.test(ua)) {
+        ieVersion = RegExp.$1;
         Util.addClass(htmlNode, "isie");
-        Util.addClass(htmlNode, "ie" + RegExp.$1);
+        Util.addClass(htmlNode, "ie" + ieVersion);
+    }
+
+    if (!ieVersion) {
+        return;
     }
 
     function getSize(w, sizes) {
