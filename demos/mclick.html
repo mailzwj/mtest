@@ -1,0 +1,69 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Click事件在移动设备上的bug</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0"></meta>
+	<style>
+	a {
+		padding: 10px;
+		line-height: 30px;
+		color: #39f;
+		text-decoration: none;
+	}
+	a:hover {
+		text-decoration: underline;
+	}
+	#M-Showbox {
+		font-size: 2em;
+	}
+	</style>
+</head>
+<body>
+	<a href="javascript:void(0);" id="M-Click">Click me!</a><br>
+	<a href="javascript:void(0);" id="M-Touch">Touch me!</a><br>
+	<a href="javascript:void(0);" id="M-Touch-Click">Touch and click!</a><br>
+	<a href="javascript:void(0);" id="M-Touch-prevent">PreventDefault on touchend!</a>
+	<div id="M-Showbox"></div>
+
+	<script>
+	var cbtn = document.getElementById("M-Click");
+	var tbtn = document.getElementById("M-Touch");
+	var ctbtn = document.getElementById("M-Touch-Click");
+	var cpbtn = document.getElementById("M-Touch-prevent");
+	var showbox = document.getElementById("M-Showbox");
+	var time1 = 0, time2 = 0;
+
+	cbtn.addEventListener("click", function(e){
+		showbox.innerHTML = "clicked!";
+	}, false);
+
+	tbtn.addEventListener("touchend", function(e){
+		showbox.innerHTML = "touched!";
+	}, false);
+
+	ctbtn.addEventListener("click", function(e){
+		showbox.innerHTML += " clicked!";
+		time1 = new Date();
+		// alert(time1 - time2);
+		showbox.innerHTML += " timestamp: " + (time1 - time2);
+	}, false);
+	ctbtn.addEventListener("touchend", function(e){
+		showbox.innerHTML = "touched!";
+		time2 = new Date();
+	}, false);
+
+	cpbtn.addEventListener("click", function(e){
+		showbox.innerHTML += " clicked!";
+		time1 = new Date();
+		showbox.innerHTML += " timestamp: " + (time1 - time2);
+		// e.preventDefault();
+	}, false);
+	cpbtn.addEventListener("touchend", function(e){
+		showbox.innerHTML = "touched!";
+		time2 = new Date();
+		e.preventDefault();
+	}, false);
+	</script>
+</body>
+</html>

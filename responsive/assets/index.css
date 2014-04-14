@@ -1,0 +1,154 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.clearfix {
+    *zoom: 1;
+}
+
+.clearfix:after {
+    display: table-cell;
+    content: "";
+    clear: both;
+}
+
+.header,
+.footer,
+.body {
+    margin: 0 auto;
+    width: 100%;
+}
+
+@media all and (max-width: 640px) {
+    .header,
+    .footer,
+    .body {
+        width: 95%;
+    }
+}
+
+/* for non-responsive browsers */
+.w640 .header,
+.w640 .footer,
+.w640 .body {
+    width: 95%;
+}
+
+.header {
+    height: 80px;
+    background-color: #39f;
+}
+
+.footer {
+    height: 60px;
+    background-color: #333;
+}
+
+.body {
+    height: 400px;
+}
+
+.body .content,
+.body .sidebar {
+    float: left;
+    height: 100%;
+}
+
+.body .content {
+    width: 85%;
+    background-color: #dedede;
+}
+
+.body .sidebar {
+    width: 15%;
+    background-color: #f50;
+}
+
+@media all and (max-width: 1024px) {
+    .body {
+        height: 400px;
+    }
+
+    .body .content,
+    .body .sidebar {
+        float: left;
+        width: 50%;
+        height: 100%;
+    }
+
+    .body .content {
+        background-color: #efefef;
+    }
+
+    .body .sidebar {
+        background-color: #f50;
+    }
+}
+
+/* for non-responsive browsers */
+
+.w1024 .body {
+    height: 400px;
+}
+
+.w1024 .body .content,
+.w1024 .body .sidebar {
+    float: left;
+    width: 50%;
+    height: 100%;
+}
+
+.w1024 .body .content {
+    background-color: #efefef;
+}
+
+.w1024 .body .sidebar {
+    background-color: #f50;
+}
+
+@media all and (max-width: 640px) {
+    .body {
+        height: auto;
+    }
+
+    .body .content,
+    .body .sidebar {
+        float: none;
+    }
+
+    .body .content {
+        width: 100%;
+        height: 400px;
+        background-color: #efefef;
+    }
+
+    .body .sidebar {
+        width: 100%;
+        height: 120px;
+        background-color: #f50;
+    }
+}
+
+/* for non-responsive browsers */
+
+.w640 .body {
+    height: auto;
+}
+
+.w640 .body .content,
+.w640 .body .sidebar {
+    float: none;
+}
+
+.w640 .body .content {
+    width: 100%;
+    height: 400px;
+    background-color: #efefef;
+}
+
+.w640 .body .sidebar {
+    width: 100%;
+    height: 120px;
+    background-color: #f50;
+}

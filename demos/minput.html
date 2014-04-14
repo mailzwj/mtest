@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0"></meta>
+	<title>输入框(input/textarea)的焦点问题</title>
+	<style>
+	input {
+		width: 90%;
+		height: 40px;
+		border: 1px solid #ccc;
+		-webkit-border-radius: 4px;
+		-moz-border-radius: 4px;
+		border-radius: 4px;
+	}
+	label, span {
+		line-height: 2.1em;
+		font-size: 2em;
+	}
+	</style>
+</head>
+<body>
+	<input id="M-Input" type="text" placeholder="Focus by click the label."><br>
+	<label for="M-Input">Label to focus</label><br>
+	<span id="M-Click">Click to focus</span><br>
+	<span id="M-Touch">Touch to focus</span>
+	<script>
+	var cbtn = document.getElementById("M-Click");
+	var tbtn = document.getElementById("M-Touch");
+	var ainp = document.getElementById("M-Input");
+
+	cbtn.addEventListener("click", function(){
+		ainp.focus();
+	}, false);
+
+	tbtn.addEventListener("touchend", function(){
+		ainp.focus();
+	}, false);
+	</script>
+</body>
+</html>
