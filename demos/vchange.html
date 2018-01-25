@@ -12,7 +12,7 @@
 (function() {
     document.onvisibilitychange = function(e) {
         console.log(e);
-        document.getElementById('OnChange').innerHTML = 'Changed';
+        document.getElementById('OnChange').innerHTML += document.hidden + '<br>';
     }
 })();
 </script>
