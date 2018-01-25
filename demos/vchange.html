@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Visibility Change</title>
+</head>
+<body>
+<div>Default visible.</div>
+<div id="OnChange"></div>
+<script>
+(function() {
+    document.onvisibilitychange = function(e) {
+        console.log(e);
+        document.getElementById('OnChange').innerHTML = 'Changed';
+    }
+})();
+</script>
+</body>
+</html>
