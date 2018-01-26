@@ -12,7 +12,7 @@
 (function() {
     var obj = document.getElementById('J_Input');
     var log = document.getElementById('J_Log');
-    document.body.addEventListener('click', function() {
+    document.addEventListener('click', function() {
         log.innerHTML = 'body click';
         obj.blur();
     }, false);
