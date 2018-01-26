@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Touch blur</title>
+</head>
+<body>
+    <input id="J_Input" type="text">
+<script>
+(function() {
+    var obj = document.getElementById('J_Input');
+    document.body.onclick = function() {
+        obj.blur();
+    };
+
+    obj.onclick = function(ev) {
+        ev.stopPropagation();
+    };
+})();
+</script>
+</body>
+</html>
