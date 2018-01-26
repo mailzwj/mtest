@@ -12,14 +12,14 @@
 (function() {
     var obj = document.getElementById('J_Input');
     var log = document.getElementById('J_Log');
-    document.body.onclick = function() {
+    document.body.addEventListener('click', function() {
         log.innerHTML = 'body click';
         obj.blur();
-    };
+    }, false);
 
-    obj.onclick = function(ev) {
+    obj.addEventListener('click', function(ev) {
         ev.stopPropagation();
-    };
+    }, false);
 })();
 </script>
 </body>
