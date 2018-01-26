@@ -6,24 +6,34 @@
     <title>Touch blur</title>
 </head>
 <body>
-    <input id="J_Input" type="text">
+    <input id="J_Input" type="text" class="test_input">
     <div id="J_Log"></div>
 <script>
 (function() {
     var obj = document.getElementById('J_Input');
     var log = document.getElementById('J_Log');
+    // 无效？...Chrome 63.0.3239.132
+    // document.body.onclick = function() {
+    //     log.innerHTML = 'Body click';
+    // };
+
     // document.addEventListener('click', function() {
     //     log.innerHTML = 'body click';
     //     obj.blur();
     // }, false);
 
-    document.addEventListener('touchstart', function() {
-        obj.blur();
+    document.addEventListener('touchstart', function(e) {
+        if (!e.target.classList.contains('test_input')) {
+            obj.blur();
+        }
     }, false);
 
-    obj.addEventListener('click', function(ev) {
-        ev.stopPropagation();
-    }, false);
+    // obj.addEventListener('click', function(ev) {
+    //     ev.stopPropagation();
+    // }, false);
+    // obj.addEventListener('touchstart', function(ev) {
+
+    // }, false);
 })();
 </script>
 </body>
