@@ -7,10 +7,13 @@
 </head>
 <body>
     <input id="J_Input" type="text">
+    <div id="J_Log"></div>
 <script>
 (function() {
     var obj = document.getElementById('J_Input');
+    var log = document.getElementById('J_Log');
     document.body.onclick = function() {
+        log.innerHTML = 'body click';
         obj.blur();
     };
 
