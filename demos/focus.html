@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Focus</title>
+</head>
+<body>
+<input id="J_Text">
+
+<input type="button" value="发送" id="J_Btn">
+<div id="showmessage">
+    
+</div>
+
+<script>
+(function() {
+    var t = document.getElementById('J_Text');
+    var b = document.getElementById('J_Btn');
+    var sb = document.getElementById('showmessage');
+    b.onclick = function() {
+        sb.innerHTML += t.value + '<br>';
+        t.focus();
+    };
+})();
+</script>
+</body>
+</html>
