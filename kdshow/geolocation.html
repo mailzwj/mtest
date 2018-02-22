@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="ZH">
+<head>
+    <meta charset="UTF-8">
+    <title>Geolocation</title>
+    <style>
+    body {
+        line-height: 1.5;
+    }
+    </style>
+</head>
+<body>
+    <div class="show-my-address" id="myAddress">
+        正在获取位置信息...
+    </div>
+    <ul class="nearby" id="myAround"></ul>
+<script src="./resources/jquery-1.11.0.min.js"></script>
+<script>
+var ADDR = {};
+$(function(){
+    var myAddr = $("#myAddress"),
+        myAround = $("#myAround"),
+        api = "http://api.map.baidu.com/geocoder/v2/?ak=hb9R1MhSnMQPG1MwcCY0tVam";
+
+    ADDR.showMyAddress = function(res){
+        var ardData = res.result.pois, list = "";
+        myAddr.html("我在：" + res.result.formatted_address);
+        $.each(ardData, function(index, addr){
+            list += '<li class="address">' + addr.addr + "</li>";
+        });
+        myAround.html(list);
+    }
+
+    navigator.geolocation.getCurrentPosition(function(addr){
+        var location = addr.coords.latitude + "," + addr.coords.longitude;
+        // var location = "30.180883,120.27205500000002";
+        var pois = 1;
+        // console.log(addr);
+        $.getScript(api + "&callback=ADDR.showMyAddress&location=" + location + "&output=json&pois=" + pois);
+    });
+});
+</script>
+</body>
+</html>
