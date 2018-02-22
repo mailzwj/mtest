@@ -21,6 +21,10 @@
     t.onfocus = function() {
        setTimeout(function() {sb.innerHTML += '<br>' + 'availHeight: ' + screen.availHeight + ', height: ' + screen.height}, 100);
     };
+    
+    window.onresize = function() {
+        sb.innerHTML += '<br>resize...';
+    };
 })();
 </script>
 </body>
