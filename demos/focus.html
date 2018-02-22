@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Focus</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
 </head>
 <body>
 <input id="J_Text">
@@ -16,10 +17,16 @@
 (function() {
     var t = document.getElementById('J_Text');
     var b = document.getElementById('J_Btn');
-    var sb = document.getElementById('showmessage');
-    sb.innerHTML = screen.availHeight;
+    var sm = document.getElementById('showmessage');
+    sm.innerHTML = 'availHeight: ' + screen.availHeight + ', height: ' + screen.height;
     t.onfocus = function() {
-       setTimeout(function() {sb.innerHTML += '<br>' + screen.availHeight}, 100);
+       setTimeout(function() {
+           sm.innerHTML += '<br>' + 'availHeight: ' + screen.availHeight + ', height: ' + screen.height;
+       }, 100);
+    };
+    
+    window.onresize = function() {
+        sm.innerHTML += '<br>resize...';
     };
 })();
 </script>
