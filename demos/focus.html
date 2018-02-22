@@ -17,14 +17,16 @@
 (function() {
     var t = document.getElementById('J_Text');
     var b = document.getElementById('J_Btn');
-    var sb = document.getElementById('showmessage');
-    sb.innerHTML = 'availHeight: ' + screen.availHeight + ', height: ' + screen.height;
+    var sm = document.getElementById('showmessage');
+    sm.innerHTML = 'availHeight: ' + screen.availHeight + ', height: ' + screen.height;
     t.onfocus = function() {
-       setTimeout(function() {sb.innerHTML += '<br>' + 'availHeight: ' + screen.availHeight + ', height: ' + screen.height}, 100);
+       setTimeout(function() {
+           sm.innerHTML += '<br>' + 'availHeight: ' + screen.availHeight + ', height: ' + screen.height;
+       }, 100);
     };
     
     window.onresize = function() {
-        sb.innerHTML += '<br>resize...';
+        sm.innerHTML += '<br>resize...';
     };
 })();
 </script>
