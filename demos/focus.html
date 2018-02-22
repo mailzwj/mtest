@@ -17,9 +17,9 @@
     var t = document.getElementById('J_Text');
     var b = document.getElementById('J_Btn');
     var sb = document.getElementById('showmessage');
-    sb.innerHTML = screen.availHeight;
+    sb.innerHTML = 'availHeight: ' + screen.availHeight + ', height: ' + screen.height;
     t.onfocus = function() {
-       setTimeout(function() {sb.innerHTML += '<br>' + screen.availHeight}, 100);
+       setTimeout(function() {sb.innerHTML += '<br>' + 'availHeight: ' + screen.availHeight + ', height: ' + screen.height}, 100);
     };
 })();
 </script>
