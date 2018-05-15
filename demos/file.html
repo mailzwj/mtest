@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>File</title>
+</head>
+<body>
+    <input type="file" id="J_File" multiple>
+    <div id="J_Data"></div>
+<script>
+(function() {
+    var ifd = document.getElementById('J_File');
+    var log = document.getElementById('J_Data');
+    ifd.onchange = function(ev) {
+        var target = ev.target;
+        var files = target.files;
+        var showText = '';
+        for (var i = 0; files[i]; i++) {
+            showText += 'File: ' + files[i].name + ', size: ' + files[i].size + ', type: ' + files[i].type + '<br>';
+        }
+        log.innerHTML = showText;
+    };
+})();
+</script>
+</body>
+</html>
