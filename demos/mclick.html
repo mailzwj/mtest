@@ -20,6 +20,7 @@
 	</style>
 </head>
 <body>
+	<div id="ua"></div>
 	<a href="javascript:void(0);" id="M-Click">Click me!</a><br>
 	<a href="javascript:void(0);" id="M-Touch">Touch me!</a><br>
 	<a href="javascript:void(0);" id="M-Touch-Click">Touch and click!</a><br>
@@ -33,6 +34,8 @@
 	var cpbtn = document.getElementById("M-Touch-prevent");
 	var showbox = document.getElementById("M-Showbox");
 	var time1 = 0, time2 = 0;
+		
+	document.getElementById('ua').innerHTML = navigator.userAgent;
 
 	cbtn.addEventListener("click", function(e){
 		showbox.innerHTML = "clicked!";
