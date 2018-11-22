@@ -85,7 +85,7 @@ body > div:nth-child(2) {
         let blockIdx = 0;
         while(i >= 0) {
             const cNum = strNum.charAt(i);
-            rs = (cNum === '0' ? (i === sLen - 1 || strNum.charAt(i + 1) === '0' ? '' : '零') : (cnNum[+cNum] + units[(sLen - i - 1) % 4])) + rs;
+            rs = (cNum === '0' ? ((sLen - 1 - i) % 4 === 0 || strNum.charAt(i + 1) === '0' ? '' : '零') : (cnNum[+cNum] + units[(sLen - i - 1) % 4])) + rs;
             if ((sLen - i) % 4 === 0 && i > 0) {
                 blockIdx++;
                 rs = blockUnits[blockIdx] + rs;
