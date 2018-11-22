@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>数字转中文</title>
+<style>
+body {
+    margin: 0;
+    display: flex;
+    justify-content: center;
+}
+
+body > div {
+    margin: 10px;
+}
+
+body > div:nth-child(2) {
+    width: 431px;
+}
+</style>
+</head>
+<body>
+    <div>
+        <p>输入数字(整数 or 小数)</p>
+        <input type="number" id="NumberEntry">
+    </div>
+    <div>
+        <p>转换结果：</p>
+        <h3 id="NumberOutput"></h3>
+    </div>
+<script>
+(() => {
+    const number = 20020051000;
+
+    // const num2cn = (num) => {
+    //     if (isNaN(+num)) {
+    //         return '';
+    //     }
+    //     const cnNum = ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九'];
+    //     const units = ['', '十', '百', '千'];
+    //     const blockUnits = ['', '万', '亿'];
+
+    //     const strNum = '' + num;
+    //     let subNumArr = [];
+    //     let idx = strNum.length;
+    //     let rs = '';
+    //     while(idx > 0) {
+    //         const start = idx - 4 < 0 ? 0 : idx - 4;
+    //         subNumArr.push(strNum.slice(start, idx));
+    //         idx -= 4;
+    //     }
+
+    //     subNumArr.forEach((sn, i) => {
+    //         const snl = sn.length;
+    //         const itemArr = sn.split('');
+    //         if (!snl) {
+    //             rs += '';
+    //         } else {
+    //             if (+sn > 0) {
+    //                 let nearNum = '';
+    //                 itemArr.forEach((item, j) => {
+    //                     nearNum += item === '0' ? '零' : (cnNum[+item] + units[snl - j - 1]);
+    //                 });
+    //                 nearNum = nearNum.replace(/零{2,}/g, '零').replace(/零$/, '');
+    //                 rs = nearNum + blockUnits[i] + rs;
+    //             }
+    //         }
+    //     });
+
+    //     return rs;
+    // };
+    const num2cn = (num) => {
+        if (isNaN(+num)) {
+            return '';
+        }
+        const cnNum = ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九'];
+        const units = ['', '十', '百', '千'];
+        const blockUnits = ['', '万', '亿'];
+
+        const strNum = '' + num;
+        let rs = '';
+
+        const sLen = strNum.length;
+        let i = sLen - 1;
+        let blockIdx = 0;
+        while(i >= 0) {
+            const cNum = strNum.charAt(i);
+            rs = (cNum === '0' ? (i === sLen - 1 || strNum.charAt(i + 1) === '0' ? '' : '零') : (cnNum[+cNum] + units[(sLen - i - 1) % 4])) + rs;
+            if ((sLen - i) % 4 === 0 && i > 0) {
+                blockIdx++;
+                rs = blockUnits[blockIdx] + rs;
+            }
+            i--;
+        }
+
+        return rs;
+    };
+
+    const float2cn = (num) => {
+        if (isNaN(+num)) {
+            return '';
+        }
+        num = '' + num;
+        if (num.indexOf('.') === -1) {
+            return num2cn(num);
+        }
+        const cnNum = ['零', '一', '二', '三', '四', '五', '六', '七', '八', '九'];
+        const numArr = num.split('.');
+        const floatLen = numArr[1].length;
+        let floatStr = '';
+        let s = 0;
+        while(s < floatLen) {
+            floatStr += cnNum[+numArr[1].charAt(s)];
+            s++;
+        }
+        return num2cn(numArr[0]) + '点' + floatStr;
+    };
+
+    const entry = document.querySelector('#NumberEntry');
+    const output = document.querySelector('#NumberOutput');
+    entry.addEventListener('input', () => {
+        const number = entry.value || 0;
+        output.innerHTML = float2cn(number);
+    }, false);
+
+    // console.log(num2cn(number));
+
+})();
+</script>
+</body>
+</html>
