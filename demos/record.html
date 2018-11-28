@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>纯前端实现录音并保存</title>
+</head>
+<body>
+<input type="button" value="开始录音" id="J_RecordControl">
+<input type="button" value="播放录音" id="J_PlayVoice">
+<input type="button" value="保存文件" id="J_SaveVoice">
+<audio id="J_VoicePlayer"></audio>
+<a id="J_Download"></a>
+
+<script>
+(() => {
+    const rc = document.querySelector('#J_RecordControl');
+    const pv = document.querySelector('#J_PlayVoice');
+    const sv = document.querySelector('#J_SaveVoice');
+    const vp = document.querySelector('#J_VoicePlayer');
+    const dl = document.querySelector('#J_Download');
+
+    let records = [];
+    let recorder;
+    let recording;
+    let count = 0;
+
+    vp.addEventListener('loadedmetadata', (ev) => {
+        vp.play();
+    }, false);
+
+    navigator.mediaDevices.getUserMedia({
+        video: false,
+        audio: true
+    }).then(stream => {
+        recorder = new MediaRecorder(stream);
+        recorder.ondataavailable = (ev) => {
+            records.push(ev.data);
+        };
+    }).catch(e => {
+        throw e;
+    });
+
+    rc.addEventListener('click', (ev) => {
+        if (recording) {
+            rc.value = '开始录音';
+            recorder.stop();
+            recording = false;
+        } else {
+            if (recorder) {
+                rc.value = '停止录音';
+                recorder.start();
+                recording = true;
+            }
+        }
+    }, false);
+
+    pv.addEventListener('click', (ev) => {
+        if (records.length) {
+            const blob = new Blob(records, {type: 'audio/mp3'});
+            const reader = new FileReader();
+            reader.addEventListener('load', (ev) => {
+                vp.src = ev.target.result;
+            }, false);
+            reader.readAsDataURL(blob);
+        }
+    }, false);
+
+    sv.addEventListener('click', (ev) => {
+        if (records.length) {
+            const blob = new Blob(records, {type: 'audio/mp3'});
+            const reader = new FileReader();
+            reader.addEventListener('load', (ev) => {
+                dl.setAttribute('href', ev.target.result);
+                dl.setAttribute('download', `录音${count++}.mp3`);
+                dl.click();
+                records = [];
+            }, false);
+            reader.readAsDataURL(blob);
+        }
+    }, false);
+})();
+</script>
+</body>
+</html>
