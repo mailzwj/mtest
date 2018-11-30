@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SCALE</title>
+<style>
+body {
+    margin: 0;
+    background-color: #e8e8e8;
+}
+.module {
+    margin: 20px 20px;
+    /* min-height: 200px; */
+    height: 200px;
+    border-radius: 10px;
+    background-color: #fff;
+    transition: transform .2s ease-out;
+    overflow: hidden;
+}
+.module .detail {
+    width: 100%;
+    height: 200px;
+    line-height: 200px;
+    text-align: center;
+    font-size: 48px;
+    background-color: #fff;
+}
+.transi {
+    transition: left 1s cubic-bezier(.37,.56,.61,1.32), top 1s cubic-bezier(.37,.56,.61,1.32), width 1s cubic-bezier(.37,.56,.61,1.32), height 1s cubic-bezier(.37,.56,.61,1.32);
+}
+.min {
+    transform: scale(0.95);
+}
+</style>
+</head>
+<body>
+<div id="J_Page" class="page">
+    <div class="module">
+        <div class="detail">Touch open</div>
+    </div>
+    <div class="module">
+        <div class="detail">Touch open</div>
+    </div>
+    <div class="module">
+        <div class="detail">Touch open</div>
+    </div>
+    <div class="module">
+        <div class="detail">Touch open</div>
+    </div>
+    <div class="module">
+        <div class="detail">Touch open</div>
+    </div>
+    <div class="module">
+        <div class="detail">Touch open</div>
+    </div>
+    <div class="module">
+        <div class="detail">Touch open</div>
+    </div>
+</div>
+<script>
+(function() {
+    const mods = document.querySelectorAll('.module');
+    const nodes = Array.from(mods);
+
+    const fullscreen = (ev) => {
+        // console.log(ev);
+        const touchEv = ev.changedTouches[0];
+        // console.log(ev.currentTarget);
+        const target = ev.currentTarget;
+        const detail = target.children[0];
+        // const winScrTop = document.body.scrollTop;
+        const win = {
+            width: window.innerWidth,
+            height: window.innerHeight
+        };
+        const rect = target.getBoundingClientRect();
+        const bounds = {
+            left: rect.left,
+            top: rect.top,
+            width: rect.width,
+            height: rect.height
+        };
+        const xScale = bounds.width - bounds.width * 0.95;
+        const yScale = bounds.height - bounds.height * 0.95;
+        detail.style.transformOrigin = '50% ' + bounds.height / 2 + 'px';
+        detail.style.position = 'fixed';
+        detail.style.zIndex = 10;
+        detail.style.top = bounds.top + yScale / 2 + 'px';
+        detail.style.left = bounds.left + xScale / 2 + 'px';
+        detail.style.width = bounds.width - xScale + 'px';
+        detail.style.height = bounds.height - yScale + 'px';
+        detail.classList.add('transi');
+        detail.offsetHeight;
+        detail.style.left = 0;
+        detail.style.top = 0;
+        detail.style.width = win.width + 'px';
+        detail.style.height = win.height + 'px';
+        detail.innerHTML = 'Touch close';
+
+        const touchend = (ev) => {
+            detail.style.top = bounds.top + yScale / 2 + 'px';
+            detail.style.left = bounds.left + xScale / 2 + 'px';
+            detail.style.width = bounds.width - xScale + 'px';
+            detail.style.height = bounds.height - yScale + 'px';
+            detail.removeEventListener('touchend', touchend, false);
+            ev.stopPropagation();
+        };
+        detail.addEventListener('touchend', touchend, false);
+        const transitionEnd = (ev) => {
+            const left = parseInt(detail.style.left);
+            if (left > 0) {
+                detail.style.position = 'static';
+                detail.classList.remove('transi');
+                isFull = false;
+            }
+            detail.removeEventListener('transitionEnd', transitionEnd, false);
+        };
+        detail.addEventListener('transitionend', transitionEnd, false);
+
+        return true;
+    };
+
+    let touched = false;
+    let isFull = false;
+
+    const bindEvent = (n) => {
+        n.addEventListener('touchstart', (ev) => {
+            if (isFull) { return; }
+            touched = true;
+            n.classList.add('min');
+        }, false);
+        n.addEventListener('touchmove', (ev) => {
+            if (touched) {
+                touched = false;
+                n.classList.remove('min');
+            }
+        }, false);
+        n.addEventListener('touchend', (ev) => {
+            if (touched) {
+                touched = false;
+                n.classList.remove('min');
+                isFull = fullscreen(ev);
+            }
+        }, false);
+    };
+
+    nodes.forEach(n => {
+        bindEvent(n);
+    });
+})();
+</script>
+</body>
+</html>
