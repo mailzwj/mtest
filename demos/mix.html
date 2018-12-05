@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Blend mode</title>
+<style>
+body {
+    text-align: center;
+}
+.wrap {
+    margin: 0 auto;
+    position: relative;
+    width: 200px;
+    height: 20px;
+    background-color: #e0e0e0;
+    border-radius: 3px;
+    overflow: hidden;
+}
+.wrap > div {
+    height: 20px;
+    text-align: center;
+    color: #f00;
+    line-height: 20px;
+    font-size: 12px;
+    mix-blend-mode: color-burn;
+}
+.wrap2 > div {
+    mix-blend-mode: normal;
+}
+.wrap .progress {
+    width: 0;
+    background-color: green;
+    transition: width 2s linear;
+}
+.wrap .progress2 {
+    background-color: transparent;
+    width: 100%;
+}
+.wrap .progress.fill,
+.wrap .item2.fill {
+    width: 100%;
+}
+.wrap .item {
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+.wrap .item2 {
+    width: 0;
+    background-color: green;
+    overflow: hidden;
+    transition: width 2s linear;
+}
+.wrap .item2 .text {
+    width: 200px;
+    height: 20px;
+    line-height: 20px;
+    color: yellow;
+}
+[type="button"] {
+    margin: 10px 0;
+}
+</style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="progress"></div>
+        <div class="item"></div>
+    </div>
+    <input type="button" value="Toggle Progress" class="J_ClassControl">
+    <div class="wrap wrap2">
+        <div class="progress progress2"></div>
+        <div class="item item2">
+            <div class="text"></div>
+        </div>
+    </div>
+    <input type="button" value="Toggle Progress 2" class="J_ClassControl2">
+<script>
+(() => {
+    const btn = document.querySelector('.J_ClassControl');
+    const btn2 = document.querySelector('.J_ClassControl2');
+    const progresser = document.querySelector('.progress');
+    const progresser2 = document.querySelector('.progress2');
+    setInterval(() => {
+        progresser.nextElementSibling.innerHTML = '当前进度：' + ((progresser.offsetWidth / progresser.parentNode.offsetWidth) * 100).toFixed(1) + '%';
+        const text = '当前进度：' + ((progresser2.nextElementSibling.offsetWidth / progresser2.parentNode.offsetWidth) * 100).toFixed(1) + '%';
+        progresser2.innerHTML = text;
+        progresser2.nextElementSibling.children[0].innerHTML = text;
+    }, 300);
+    btn.addEventListener('click', (ev) => {
+        if (progresser.classList.contains('fill')) {
+            progresser.classList.remove('fill');
+        } else {
+            progresser.classList.add('fill');
+        }
+    }, false);
+    btn2.addEventListener('click', (ev) => {
+        const item = progresser2.nextElementSibling;
+        if (item.classList.contains('fill')) {
+            item.classList.remove('fill');
+        } else {
+            item.classList.add('fill');
+        }
+    }, false);
+})();
+</script>
+</body>
+</html>
