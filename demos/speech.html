@@ -7,7 +7,7 @@
 </head>
 <body>
 	<div id="main" style="padding-top: 50px; text-align: center;">
-    <input type="button" value="按住录音" id="recorder" />
+    <input type="button" value="按住录音" id="recorder" style="user-select: none" oncontextmenu="return false" />
   </div>
   <script>
   (() => {
@@ -34,7 +34,7 @@
           record.style.color = "black";
         }
 
-        stop.ontouchend = function() {
+        record.ontouchend = function() {
           mediaRecorder.stop();
           console.log(mediaRecorder.state);
           console.log("recorder stopped");
