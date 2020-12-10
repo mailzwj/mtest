@@ -12,8 +12,8 @@
   </div>
   <script>
   (() => {
-    const inp = document.querySelector('speeker');
-    const rs = document.querySelector('result');
+    const inp = document.querySelector('#speeker');
+    const rs = document.querySelector('#result');
     inp.addEventListener('webkitspeechchange', () => {
       rs.innerHTML += this.value + '<br />';
     }, false);
