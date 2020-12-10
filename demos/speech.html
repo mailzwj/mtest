@@ -3,21 +3,86 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Input speech</title>
-	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0"></meta>
+	<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0" />
 </head>
 <body>
-	<div id="main">
-    <input id="speeker" type="text" x-webkit-speech lang="zh-CN" />
-		<a href="tel:12345678">test call</a>
-    <div id="result"></div>
+	<div id="main" style="padding-top: 50px; text-align: center;">
+    <input type="button" value="按住录音" id="recorder" />
   </div>
   <script>
   (() => {
-    const inp = document.querySelector('#speeker');
-    const rs = document.querySelector('#result');
-    inp.addEventListener('webkitspeechchange', () => {
-      rs.innerHTML += this.value + '<br />';
-    }, false);
+    if (navigator.mediaDevices) {
+      console.log('getUserMedia supported.');
+
+      const constraints = { audio: true };
+      let chunks = [];
+      const record = document.querySelector('#recorder');
+      const box = document.querySelector('#main');
+
+      navigator.mediaDevices.getUserMedia(constraints)
+      .then(function(stream) {
+
+        var mediaRecorder = new MediaRecorder(stream);
+
+        // visualize(stream);
+
+        record.ontouchstart = function() {
+          mediaRecorder.start();
+          console.log(mediaRecorder.state);
+          console.log("recorder started");
+          record.style.background = "red";
+          record.style.color = "black";
+        }
+
+        stop.ontouchend = function() {
+          mediaRecorder.stop();
+          console.log(mediaRecorder.state);
+          console.log("recorder stopped");
+          record.style.background = "";
+          record.style.color = "";
+        }
+
+        mediaRecorder.onstop = function(e) {
+          console.log("data available after MediaRecorder.stop() called.");
+
+          // var clipName = prompt('Enter a name for your sound clip');
+
+          var clipContainer = document.createElement('article');
+          // var clipLabel = document.createElement('p');
+          var audio = document.createElement('audio');
+          var deleteButton = document.createElement('button');
+        
+          clipContainer.classList.add('clip');
+          audio.setAttribute('controls', '');
+          deleteButton.innerHTML = "Delete";
+          // clipLabel.innerHTML = clipName;
+
+          clipContainer.appendChild(audio);
+          // clipContainer.appendChild(clipLabel);
+          clipContainer.appendChild(deleteButton);
+          box.appendChild(clipContainer);
+
+          audio.controls = true;
+          var blob = new Blob(chunks, { 'type' : 'audio/ogg; codecs=opus' });
+          chunks = [];
+          var audioURL = URL.createObjectURL(blob);
+          audio.src = audioURL;
+          console.log("recorder stopped");
+
+          deleteButton.onclick = function(e) {
+            evtTgt = e.target;
+            evtTgt.parentNode.parentNode.removeChild(evtTgt.parentNode);
+          }
+        }
+
+        mediaRecorder.ondataavailable = function(e) {
+          chunks.push(e.data);
+        }
+      })
+      .catch(function(err) {
+        console.log('The following error occured: ' + err);
+      })
+    }
   })();
   </script>
 </body>
